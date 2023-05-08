@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>To Do List - Get it done!</title>
+<script defer src="index.js"></script></head>
+<body>
+    <section class="list-container block">
+        <div class="subtitle flex">
+          <h2>Today's To Do</h2>
+          <img class="icon-reload pointer" id="icon-reload-id" alt="reload icon">
+        </div>
+        <form class="add-form flex">
+            <label for="newList-item">          
+                <input class="add-item" name="newList-item" type="text" placeholder="Add to your list..." required/>
+            </label>
+          <img id="icon-send-id" class="icon-send pointer" alt="Enter icon">
+        </form>
+        <ul class="list-holder" id="list-holder-id"></ul>
+        <button class="clear-bttn pointer">Clear all completed</button>
+      </section>
+</body>
+</html>
