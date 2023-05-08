@@ -11,37 +11,36 @@ const listData = document.querySelector('.list-holder');
 // append new list to ul
 const createList = () => {
   listData.innerHTML = '';
-  for (let i = 0; i < listObj.length; i += 1) {
+  listObj.forEach((item, i) => {
     const lisItem = document.createElement('li');
     lisItem.className = 'list-item flex';
     lisItem.innerHTML = `
-    <div class="check-descrip flex">
-      <label>
-        <input type="checkbox" name="completed" class="check" ${listObj[i].completed ? 'checked' : ''} data-id="${listObj[i].id}">
-      </label>
-      <label label class="description-label" for="descrip-id${listObj[i].id}">
-        <input type="text" name="action-toDo" class="description ${listObj[i].completed ? 'completed' : ''}" id="descrip-id${listObj[i].id}" value="${listObj[i].description}">
-      </label>
-    </div>
-    <img src="${moveImg}" alt="move icon" class="icon-move pointer" id="swapIcon${listObj[i].id}-${i}">
-    <img src="${deleteImg}" alt="trash pin icon" class="icon-delete pointer hide" id="swapHide-icon-${i}">    
+      <div class="check-descrip flex">
+        <label>
+          <input type="checkbox" name="completed" class="check" ${item.completed ? 'checked' : ''} data-id="${item.id}">
+        </label>
+        <label label class="description-label" for="descrip-id${item.id}">
+          <input type="text" name="action-toDo" class="description ${item.completed ? 'completed' : ''}" id="descrip-id${item.id}" value="${item.description}">
+        </label>
+      </div>
+      <img src="${moveImg}" alt="move icon" class="icon-move pointer" id="swapIcon${item.id}-${i}">
+      <img src="${deleteImg}" alt="trash pin icon" class="icon-delete pointer hide" id="swapHide-icon-${i}">    
     `;
-
+  
     listData.appendChild(lisItem);
-
+  
     // interaccion while clicking the input item
-
-    const edit = document.querySelector(`label[for="descrip-id${listObj[i].id}"]`);
+    const edit = document.querySelector(`label[for="descrip-id${item.id}"]`);
     const removeBttn = document.getElementById(`swapHide-icon-${i}`);
-    const hideIcon = document.getElementById(`swapIcon${listObj[i].id}-${i}`);
-    const reverseEdit = document.getElementById(`descrip-id${listObj[i].id}`);
-
+    const hideIcon = document.getElementById(`swapIcon${item.id}-${i}`);
+    const reverseEdit = document.getElementById(`descrip-id${item.id}`);
+  
     edit.addEventListener('click', () => {
       lisItem.classList.add('bgYellow');
       removeBttn.classList.remove('hide');
       hideIcon.classList.add('hide');
     });
-
+  
     reverseEdit.addEventListener('blur', (event) => {
       const input = event.target;
       const id = parseInt(input.id.replace('descrip-id', ''), 10);
@@ -54,6 +53,7 @@ const createList = () => {
         saveData();
       }, 100);
     });
+  
     // remove
     removeBttn.addEventListener('click', (event) => {
       const button = event.target;
@@ -71,20 +71,18 @@ const createList = () => {
         createList();
       }
     });
-
+  
     const checkboxes = Array.from(document.querySelectorAll('.check'));
-
     checkboxes.forEach((checkbox, idx) => {
       checkbox.addEventListener('click', () => {
-        // const id = idx;
         Checked(idx);
         saveData();
         createList();
       });
     });
-  }
+  });
 };
 
-window.onload = createList;
+createList();
 
 export default createList;

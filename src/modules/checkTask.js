@@ -13,9 +13,9 @@ console.log(taskId);
 
 const deleteComplete = () => {
   const CompletedTask = listObj.filter((task) => task.completed === false);
-  for (let i = 0; i < CompletedTask.length; i += 1) {
-    CompletedTask[i].id = i + 1;
-  }
+  CompletedTask.forEach((task, index) => {
+    task.id = index + 1;
+  });
   localStorage.setItem('data-lis', JSON.stringify(CompletedTask));
   window.location.reload();
 };
